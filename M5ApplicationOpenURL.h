@@ -16,9 +16,14 @@ typedef BOOL (^M5ApplicationOpenURLCallback)(NSURL *URL, NSString *sourceApplica
 
 #pragma mark Methods
 
+/** Removes an already added handler, else does nothing. */
 + (void)removeHandler:(id<NSObject>)handler;
-+ (id<NSObject>)addHandlerWithTarget:(id)target selector:(SEL)selector; //e.g. - (BOOL)handleOpenURL:(NSURL *)URL fromApp:(NSString *)sourceApp;
-+ (id<NSObject>)addHandlerWithCallback:(M5ApplicationOpenURLCallback)callback;
+
+/** Adds/returns handler which will call a selector (e.g. '- (BOOL)handleOpenURL:(NSURL *)URL fromApp:(NSString *)sourceApp;') on a (weakly held) target object. */
++ (id<NSObject>)addHandlerWithTarget:(id)target selector:(SEL)selector;
+
+/** Adds/returns handler which will call a (copied) block. */
++ (id<NSObject>)addHandlerWithCallback:(RAMApplicationOpenURLCallback)callback;
 
 #pragma mark -
 
